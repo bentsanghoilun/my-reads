@@ -3,7 +3,24 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import Divider from '@mui/material/Divider';
 import { AiOutlineCheck } from "react-icons/ai";
+import Tooltip from '@mui/material/Tooltip';
 
+const CustomTooltip = props => {
+    const { bookTitle, authors } = props;
+    return (
+        <Tooltip
+            arrow
+            title={
+                <>
+                    <h3>{bookTitle}</h3>
+                    <p>{ authors.join(', ')}</p>
+                </>
+            }
+        >
+            {props.children}
+        </Tooltip>
+    )
+}
 
 const Book = props => {
     const { book, shelfs, onUpdateBook } = props;
@@ -19,12 +36,18 @@ const Book = props => {
 
     return (
         <>
-            <img
-                src={book.imageLinks.thumbnail}
-                alt={book.title} 
-                className={`book-cover${open ? ' focused' : ''}`}
-                onClick={handleClick}
-            />
+            <CustomTooltip
+                bookTitle={book.title}
+                authors={book.authors || []}
+            >
+                <img
+                    src={book.imageLinks.thumbnail}
+                    alt={book.title} 
+                    className={`book-cover${open ? ' focused' : ''}`}
+                    onClick={handleClick}
+                />
+            </CustomTooltip>
+            
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -48,6 +71,15 @@ const Book = props => {
                         </MenuItem>
                     ))
                 }
+                <Divider />
+                <MenuItem
+                    key={`book-${book.id}-menu-item-none}`}
+                    selected={!book.shelf}
+                    onClick={() => handleClose(book, `none`)}
+                >
+                    { !book.shelf && <AiOutlineCheck style={{marginRight: '8px'}} /> }
+                    None
+                </MenuItem>
             </Menu>
         </>
     )

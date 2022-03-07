@@ -21,6 +21,12 @@ const App = props => {
 
 	const updateBook = async (book, shelf) => {
 		if (!shelf || shelf === `backdropClick`) { return };
+		if (shelf === `none`) {
+			await API.update(book, 'none');
+			setBooks([...books].filter(item => item.id !== book.id));
+			return
+		}
+
 		await API.update(book, shelf);
 		const isExist = books.find(item => item.id === book.id);
 		let tempBook = book;

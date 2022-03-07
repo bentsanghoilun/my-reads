@@ -8,13 +8,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Book from './Book';
 import { useNavigate } from 'react-router-dom';
+import getDefaultShelfs from './DefaultShelfs';
 
 
-const shelfs = [
-    "currentlyReading",
-    "wantToRead",
-    "read"
-];
+const shelfs = getDefaultShelfs();
 
 const Shelf = props => {
     const { shelfname, books, onUpdateBook } = props;

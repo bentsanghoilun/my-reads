@@ -11,12 +11,9 @@ import { Box } from '@mui/material';
 import * as API from './BooksAPI';
 import Book from './Book';
 import debounce from 'lodash.debounce';
+import getDefaultShelfs from './DefaultShelfs';
 
-const shelfs = [
-    "currentlyReading",
-    "wantToRead",
-    "read"
-];
+const shelfs = getDefaultShelfs();
 
 const fetchData = async (query, cb) => {
     if (query === '') {
