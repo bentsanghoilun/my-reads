@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BookShelfs from './BookShelfs';
 import * as API from './BooksAPI';
 import Search from './Search';
+import NotFound from './NotFound';
 
 const App = props => {
 
@@ -44,6 +45,9 @@ const App = props => {
 		<div className='App'>
 			<Router>
 				<Routes>
+					<Route path='*' element={
+						<NotFound/>
+					} />
 					<Route path='/' element={
 						<BookShelfs
 							loaded={loaded}
