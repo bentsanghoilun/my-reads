@@ -3,24 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import Divider from '@mui/material/Divider';
 import { AiOutlineCheck } from "react-icons/ai";
-import Tooltip from '@mui/material/Tooltip';
-
-const CustomTooltip = props => {
-    const { bookTitle, authors } = props;
-    return (
-        <Tooltip
-            arrow
-            title={
-                <>
-                    <h3>{bookTitle}</h3>
-                    <p>{ authors.join(', ')}</p>
-                </>
-            }
-        >
-            {props.children}
-        </Tooltip>
-    )
-}
+import { Typography } from '@mui/material';
 
 const Book = props => {
     const { book, shelfs, onUpdateBook } = props;
@@ -36,9 +19,15 @@ const Book = props => {
 
     return (
         <>
-            <CustomTooltip
-                bookTitle={book.title}
-                authors={book.authors || []}
+            <div
+                style={{
+                    maxWidth: '154px',
+                    margin: '1rem 2rem',
+                    display: 'flex',
+                    flexFlow: 'column wrap',
+                    alignItems: 'center',
+                    justifyContent:'start'
+                }}
             >
                 <img
                     src={book.imageLinks.thumbnail}
@@ -46,7 +35,11 @@ const Book = props => {
                     className={`book-cover${open ? ' focused' : ''}`}
                     onClick={handleClick}
                 />
-            </CustomTooltip>
+                <div>
+                    <Typography><b>{book.title}</b></Typography>
+                    <Typography color={'#888888'} >{ book.authors ? book.authors.join(', ') : '' }</Typography>
+                </div>
+            </div>
             
             <Menu
                 id="basic-menu"

@@ -77,7 +77,7 @@ const Search = props => {
                         <Box sx={{
                             display: 'flex',
                             flexDirection: 'row',
-                            alignItems: 'center',
+                            alignItems: 'flex-start',
                             justifyContent: 'center',
                             flexWrap: 'wrap'
                         }}>
